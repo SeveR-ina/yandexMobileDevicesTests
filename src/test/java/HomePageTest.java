@@ -1,15 +1,17 @@
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+import pages.MarketMainPage;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
 /**
  * Created by rchepkunova on 18.08.2016.
  */
-public class HomePageTest extends BeforeTests {
+public class HomePageTest extends MainOperations {
 
 
     public HomePageTest() throws IOException {
@@ -18,7 +20,7 @@ public class HomePageTest extends BeforeTests {
 
     @AfterClass
     public void tearDown() throws Exception {
-        driver.close();
+         quitBrowser();
     }
 
     @Test(priority = 1)
@@ -27,9 +29,8 @@ public class HomePageTest extends BeforeTests {
     }
 
     @Test(dependsOnMethods = { "isHomePageVisibleTest" })
-    public void getRegisterFormTest() {
-        homePage.callRegisterPopup();
-
-        assertTrue(homePage.isRegisterPopUpVisible());
+    public void goToMarketPage() {
+        MarketMainPage marketMainPage = homePage.goToMarketPage();
+        assertNotNull(marketMainPage);
     }
 }

@@ -12,13 +12,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by rchepkunova on 18.08.2016.
  */
-abstract class BeforeTests {
+abstract class MainOperations {
     WebDriver driver;
     HomePage homePage = null;
     private Properties testProperties = new Properties();
 
-    BeforeTests(boolean openHomePage) throws IOException {
-        String propertiesPath = "C:\\Users\\rchepkunova\\IdeaProjects\\Tests\\src\\test\\resources\\test.properties";
+    MainOperations(boolean openHomePage) throws IOException {
+        String propertiesPath = "src\\test\\resources\\test.properties";
         FileInputStream testPropertiesFile = new FileInputStream(propertiesPath);
         testProperties.load(testPropertiesFile);
         openBrowser();
@@ -36,5 +36,9 @@ abstract class BeforeTests {
         driver = new MarionetteDriver(capabilities);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+    }
+
+    protected void quitBrowser() throws Exception {
+        driver.quit();
     }
 }
