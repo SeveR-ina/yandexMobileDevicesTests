@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by cherr on 15-Oct-16.
  */
 public class AdvancedSearchPage extends BasePage {
-    @FindBy(id = "glf-priceto-var")
+    @FindBy(id = "glf-pricefrom-var")
     private WebElement priceToInput;
 
     @FindBy(xpath = "//span[@class='title__content' and contains(text(), 'Диагональ экрана, \"')]")
@@ -22,7 +23,7 @@ public class AdvancedSearchPage extends BasePage {
     @FindBy(xpath = "//a[@class='link link_theme_major n-filter-sorter__link i-bem link_js_inited' and contains(text(), 'по новизне')]")
     private WebElement sortByNew;
 
-    @FindBy(xpath = "span[@class='header2-menu__text' and contains(text(), 'Отложенные')]")
+    @FindBy(xpath = "//span[@class='header2-menu__text' and contains(text(), 'Отложенные')]")
     private WebElement savedMobilePhones;
 
     @FindBy(id = "glf-2142557926-from")
@@ -55,9 +56,26 @@ public class AdvancedSearchPage extends BasePage {
 
     public void chooseSettings() {
         printIntoField("20000", priceToInput);
-        spanDiagonal.click();
-        printIntoField("3", diagonalFromInput);
+        scrollDownPage();
+        System.out.println("lala" + spanDiagonal.getAttribute("Диагональ экрана, \""));
+        waitForVisibilityOf(spanDiagonal);
+        if (spanDiagonal.isDisplayed())
+        {
+            spanDiagonal.click();
+            printIntoField("3", diagonalFromInput);
+        }
+
         chooseMobileCompanies();
+    }
+
+    private void scrollDownPage(){
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("window.scrollBy(0,750)", "");
+    }
+
+    private void scrollUpPage(){
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("window.scrollBy(0, -750)", "");
     }
 
     private void printIntoField(String text, WebElement input){
@@ -76,6 +94,7 @@ public class AdvancedSearchPage extends BasePage {
     }
 
     public boolean isMobilePhoneSaved() {
+        scrollUpPage();
         for (WebElement element : saveThisPhoneList) {
             Actions action = new Actions(driver);
             action.moveToElement(element).click().perform();

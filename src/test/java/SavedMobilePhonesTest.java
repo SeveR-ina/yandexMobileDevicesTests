@@ -26,8 +26,8 @@ public class SavedMobilePhonesTest extends MainOperations {
         driver.get(testProperties.getProperty("siteUrl"));
         YandexPage yandexPage = PageFactory.initElements(driver, YandexPage.class);
         YandexMarketPage yandexMarketPage = yandexPage.goToMarketPage();
-        yandexMarketPage.goToMobileDevices();
-        MobileDevicesPage mobileDevicesPage = yandexMarketPage.goToMobileDevices();
+        ElectronicDevicesPage electronicDevicesPage = yandexMarketPage.isElectronicDevicesPageOpened();
+        MobileDevicesPage mobileDevicesPage = electronicDevicesPage.goToMobileDevices();
         AdvancedSearchPage advancedSearchPage = mobileDevicesPage.goToAdvancedSearchPage();
         savedMobilePhonesPage = advancedSearchPage.goToSavedMobilePhonesPage();
     }

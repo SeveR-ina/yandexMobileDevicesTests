@@ -3,21 +3,17 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.AdvancedSearchPage;
-import pages.MobileDevicesPage;
-import pages.YandexMarketPage;
-import pages.YandexPage;
+import pages.*;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Created by cherr on 15-Oct-16.
  */
 public class MobileDevicesTest extends MainOperations {
-    MobileDevicesPage mobileDevicesPage;
+    private MobileDevicesPage mobileDevicesPage;
 
     public MobileDevicesTest() throws IOException {
         super();
@@ -30,8 +26,8 @@ public class MobileDevicesTest extends MainOperations {
         driver.get(testProperties.getProperty("siteUrl"));
         YandexPage yandexPage = PageFactory.initElements(driver, YandexPage.class);
         YandexMarketPage yandexMarketPage = yandexPage.goToMarketPage();
-        yandexMarketPage.goToMobileDevices();
-        mobileDevicesPage = yandexMarketPage.goToMobileDevices();
+        ElectronicDevicesPage electronicDevicesPage = yandexMarketPage.isElectronicDevicesPageOpened();
+        mobileDevicesPage = electronicDevicesPage.goToMobileDevices();
     }
 
     @AfterClass

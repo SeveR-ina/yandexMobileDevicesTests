@@ -3,7 +3,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.ElectronicDevicesPage;
+import pages.MobileDevicesPage;
+import pages.YandexMarketPage;
+import pages.YandexPage;
 
 import java.io.IOException;
 
@@ -12,10 +15,10 @@ import static org.testng.Assert.assertNotNull;
 /**
  * Created by cherr on 15-Oct-16.
  */
-public class AdvancedSearchTest extends MainOperations {
-    private AdvancedSearchPage advancedSearchPage;
+public class ElectronicDevicesTest extends  MainOperations {
+    private ElectronicDevicesPage electronicDevicesPage;
 
-    public AdvancedSearchTest() throws IOException {
+    public ElectronicDevicesTest() throws IOException {
         super();
     }
 
@@ -26,9 +29,7 @@ public class AdvancedSearchTest extends MainOperations {
         driver.get(testProperties.getProperty("siteUrl"));
         YandexPage yandexPage = PageFactory.initElements(driver, YandexPage.class);
         YandexMarketPage yandexMarketPage = yandexPage.goToMarketPage();
-        ElectronicDevicesPage electronicDevicesPage = yandexMarketPage.isElectronicDevicesPageOpened();
-        MobileDevicesPage mobileDevicesPage = electronicDevicesPage.goToMobileDevices();
-        advancedSearchPage = mobileDevicesPage.goToAdvancedSearchPage();
+        electronicDevicesPage = yandexMarketPage.isElectronicDevicesPageOpened();
     }
 
     @AfterClass
@@ -37,15 +38,9 @@ public class AdvancedSearchTest extends MainOperations {
     }
 
     @Test(priority = 1)
-    public void saveMobilePhone(){
-        advancedSearchPage.chooseSettings();
-        assertNotNull(advancedSearchPage.isMobilePhoneSaved());
-    }
-
-    @Test(priority = 2)
-    public void goToSavedMobilePhones(){
-        SavedMobilePhonesPage savedMobilePhonesPage = advancedSearchPage.goToSavedMobilePhonesPage();
-        assertNotNull(savedMobilePhonesPage);
+    public void goToMobileDevicesPage(){
+        MobileDevicesPage mobileDevicesPage = electronicDevicesPage.goToMobileDevices();
+        assertNotNull(mobileDevicesPage);
     }
 
 }
