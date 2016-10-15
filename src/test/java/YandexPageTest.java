@@ -20,7 +20,7 @@ public class YandexPageTest extends MainOperations {
 
     @BeforeTest
     @Parameters("browserName")
-    public void openBrowsers(String browserName) throws IOException{
+    public void setUp(String browserName) throws IOException{
         openBrowser(browserName);
         driver.get(testProperties.getProperty("siteUrl"));
         yandexPage = PageFactory.initElements(driver, YandexPage.class);

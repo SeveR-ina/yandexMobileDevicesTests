@@ -3,35 +3,33 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.AdvancedSearchPage;
-import pages.MobileDevicesPage;
-import pages.YandexMarketPage;
-import pages.YandexPage;
+import pages.*;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * Created by cherr on 15-Oct-16.
  */
-public class MobileDevicesTest extends MainOperations {
-    MobileDevicesPage mobileDevicesPage;
+public class SavedMobilePhonesTest extends MainOperations {
+    private SavedMobilePhonesPage savedMobilePhonesPage;
 
-    public MobileDevicesTest() throws IOException {
+    public SavedMobilePhonesTest() throws IOException {
         super();
     }
 
     @BeforeTest
     @Parameters("browserName")
-    public void setUp(String browserName) throws IOException{
+    public void setUp(String browserName) throws IOException {
         openBrowser(browserName);
         driver.get(testProperties.getProperty("siteUrl"));
         YandexPage yandexPage = PageFactory.initElements(driver, YandexPage.class);
         YandexMarketPage yandexMarketPage = yandexPage.goToMarketPage();
         yandexMarketPage.goToMobileDevices();
-        mobileDevicesPage = yandexMarketPage.goToMobileDevices();
+        MobileDevicesPage mobileDevicesPage = yandexMarketPage.goToMobileDevices();
+        AdvancedSearchPage advancedSearchPage = mobileDevicesPage.goToAdvancedSearchPage();
+        savedMobilePhonesPage = advancedSearchPage.goToSavedMobilePhonesPage();
     }
 
     @AfterClass
@@ -40,8 +38,9 @@ public class MobileDevicesTest extends MainOperations {
     }
 
     @Test(priority = 1)
-    public void goToAdvancedSearchPage(){
-        AdvancedSearchPage advancedSearchPage = mobileDevicesPage.goToAdvancedSearchPage();
-        assertNotNull(advancedSearchPage);
+    public void printRatingOfMobilePhone() {
+        String text = savedMobilePhonesPage.getRaitingText();
+        assertNotNull(text);
+        System.out.println("Mobile Phone Rating = " + text);
     }
 }

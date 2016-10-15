@@ -23,7 +23,7 @@ public class YandexMarketTest extends MainOperations{
 
     @BeforeTest
     @Parameters("browserName")
-    public void openBrowsers(String browserName) throws IOException{
+    public void setUp(String browserName) throws IOException{
         openBrowser(browserName);
         driver.get(testProperties.getProperty("siteUrl"));
         YandexPage yandexPage = PageFactory.initElements(driver, YandexPage.class);

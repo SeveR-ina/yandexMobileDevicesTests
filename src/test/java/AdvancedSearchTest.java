@@ -10,16 +10,13 @@ import pages.YandexPage;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
 /**
  * Created by cherr on 15-Oct-16.
  */
-public class MobileDevicesTest extends MainOperations {
-    MobileDevicesPage mobileDevicesPage;
+public class AdvancedSearchTest extends MainOperations {
+    AdvancedSearchPage advancedSearchPage;
 
-    public MobileDevicesTest() throws IOException {
+    public AdvancedSearchTest() throws IOException {
         super();
     }
 
@@ -31,7 +28,8 @@ public class MobileDevicesTest extends MainOperations {
         YandexPage yandexPage = PageFactory.initElements(driver, YandexPage.class);
         YandexMarketPage yandexMarketPage = yandexPage.goToMarketPage();
         yandexMarketPage.goToMobileDevices();
-        mobileDevicesPage = yandexMarketPage.goToMobileDevices();
+        MobileDevicesPage mobileDevicesPage = yandexMarketPage.goToMobileDevices();
+        advancedSearchPage = mobileDevicesPage.goToAdvancedSearchPage();
     }
 
     @AfterClass
@@ -40,8 +38,18 @@ public class MobileDevicesTest extends MainOperations {
     }
 
     @Test(priority = 1)
-    public void goToAdvancedSearchPage(){
-        AdvancedSearchPage advancedSearchPage = mobileDevicesPage.goToAdvancedSearchPage();
-        assertNotNull(advancedSearchPage);
+    public void chooseSettings(){
+
     }
+
+    @Test(priority = 2)
+    public void saveMobilePhone(){
+
+    }
+
+    @Test(priority = 3)
+    public void goToSavedMobilePhones(){
+
+    }
+
 }
