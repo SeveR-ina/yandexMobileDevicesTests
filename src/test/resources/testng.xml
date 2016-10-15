@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<suite name="Yandex Market Suite" thread-count="2" parallel="tests">
+<suite name="Yandex Market Suite">
     <test name="Chrome">
         <parameter name="browserName" value="chrome" />
             <classes>
-               <class name="HomePageTest" />
+                <class name="YandexMarketTest"/>
             </classes>
     </test>
     <test name="FireFox">
         <parameter name="browserName" value="firefox" />
-            <classes>
-                <class name="HomePageTest" />
-            </classes>
+        <classes>
+            <class name="YandexMarketTest"/>
+        </classes>
     </test>
 </suite>

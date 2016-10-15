@@ -8,12 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by rchepkunova on 18.08.2016.
  */
-public class HomePage extends BasePage {
+public class YandexPage extends BasePage {
 
     @FindBy(css = "a[data-id=\"market\"]")
     private WebElement marketLink;
 
-    public HomePage(WebDriver driver) {
+    public YandexPage(WebDriver driver) {
         super(driver);
     }
 
@@ -22,9 +22,9 @@ public class HomePage extends BasePage {
         return marketLink.isDisplayed();
     }
 
-    public MarketMainPage goToMarketPage(){
+    public YandexMarketPage goToMarketPage(){
         marketLink.click();
-        return PageFactory.initElements(driver, MarketMainPage.class);
+        return PageFactory.initElements(driver, YandexMarketPage.class);
     }
 
 }

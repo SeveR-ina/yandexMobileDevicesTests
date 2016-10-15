@@ -1,7 +1,7 @@
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
-import pages.HomePage;
-import pages.MarketMainPage;
+import pages.YandexPage;
+import pages.YandexMarketPage;
 
 import java.io.IOException;
 
@@ -12,9 +12,9 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by rchepkunova on 18.08.2016.
  */
-public class HomePageTest extends MainOperations {
-    private HomePage homePage = null;
-    public HomePageTest() throws IOException {
+public class YandexPageTest extends MainOperations {
+    private YandexPage yandexPage;
+    public YandexPageTest() throws IOException {
         super();
     }
 
@@ -23,23 +23,19 @@ public class HomePageTest extends MainOperations {
     public void openBrowsers(String browserName) throws IOException{
         openBrowser(browserName);
         driver.get(testProperties.getProperty("siteUrl"));
-        homePage = PageFactory.initElements(driver, HomePage.class);
+        yandexPage = PageFactory.initElements(driver, YandexPage.class);
     }
 
     @AfterClass
     public void tearDown() throws Exception {
-         quitBrowser();
+        quitBrowser();
     }
 
     @Test(priority = 1)
-    public void isHomePageVisibleTest() {
-        assertTrue(homePage.isHomePageVisible());
-    }
-
-    @Test(dependsOnMethods = { "isHomePageVisibleTest" })
-    public void goToMarketPage() {
-        MarketMainPage marketMainPage = homePage.goToMarketPage();
-        assertNotNull(marketMainPage);
+    public void  goToMarketPage() {
+        assertTrue(yandexPage.isHomePageVisible());
+        YandexMarketPage yandexMarketPage = yandexPage.goToMarketPage();
+        assertNotNull(yandexMarketPage);
     }
 
 }
