@@ -4,13 +4,13 @@
     <test name="Chrome">
         <parameter name="browserName" value="chrome" />
             <classes>
-                <class name="AdvancedSearchTest"/>
+                <class name="SavedMobilePhonesTest"/>
             </classes>
     </test>
     <test name="FireFox">
         <parameter name="browserName" value="firefox" />
         <classes>
-            <class name="AdvancedSearchTest"/>
+            <class name="SavedMobilePhonesTest"/>
         </classes>
     </test>
 </suite>

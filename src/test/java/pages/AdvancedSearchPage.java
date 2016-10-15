@@ -17,14 +17,17 @@ public class AdvancedSearchPage extends BasePage {
     @FindBy(id = "glf-pricefrom-var")
     private WebElement priceToInput;
 
-    @FindBy(xpath = "//span[@class='title__content' and contains(text(), 'Диагональ экрана, \"')]")
+    @FindBy(xpath = "//span[@class='title__content' and contains(text(), 'Диагональ')]")
     private WebElement spanDiagonal;
 
     @FindBy(xpath = "//a[@class='link link_theme_major n-filter-sorter__link i-bem link_js_inited' and contains(text(), 'по новизне')]")
     private WebElement sortByNew;
 
-    @FindBy(xpath = "//span[@class='header2-menu__text' and contains(text(), 'Отложенные')]")
+    @FindBy(xpath = "//span[@class='header2-menu__text']")
     private WebElement savedMobilePhones;
+
+    @FindBy(xpath = "//h1[@class='title title_size_32 i-bem title_changeable_yes title_js_inited' and contains(text(), 'Мобильные телефоны')]")
+    private WebElement h1;
 
     @FindBy(id = "glf-2142557926-from")
     private WebElement diagonalFromInput;
@@ -47,9 +50,6 @@ public class AdvancedSearchPage extends BasePage {
     @FindAll({@FindBy(xpath = "//span[@class='n-product-toolbar__item-label n-product-toolbar__item-label_activated_no' and contains(text(), 'Отложить')]")})
     private List<WebElement> saveThisPhoneList;
 
-    //@FindBy(css = "div[class='n-filter-panel-aside__apply']")
-    //private WebElement applyButton;
-
     public AdvancedSearchPage(WebDriver driver) {
         super(driver);
     }
@@ -57,8 +57,8 @@ public class AdvancedSearchPage extends BasePage {
     public void chooseSettings() {
         printIntoField("20000", priceToInput);
         scrollDownPage();
-        System.out.println("lala" + spanDiagonal.getAttribute("Диагональ экрана, \""));
-        waitForVisibilityOf(spanDiagonal);
+        //System.out.println("lala" + spanDiagonal.getAttribute("Диагональ экрана, \""));
+        waitForVisibilityOf(spanDiagonal, 20);
         if (spanDiagonal.isDisplayed())
         {
             spanDiagonal.click();
@@ -93,18 +93,27 @@ public class AdvancedSearchPage extends BasePage {
         htcMobilePhonesCheckBox.click();
     }
 
+    public void changeSort(){
+        waitForVisibilityOf(sortByNew);
+        sortByNew.click();
+    }
+
     public boolean isMobilePhoneSaved() {
         scrollUpPage();
         for (WebElement element : saveThisPhoneList) {
             Actions action = new Actions(driver);
             action.moveToElement(element).click().perform();
-            if (savedMobilePhones.getText().equals("1")) return true;
-            break;
+            scrollUpPage();
+            waitForVisibilityOf(savedMobilePhones);
+            return true;
         }
        return false;
     }
 
     public SavedMobilePhonesPage goToSavedMobilePhonesPage(){
+        //scrollUpPage();
+        waitForVisibilityOf(h1);
+        h1.click();
         savedMobilePhones.click();
         return PageFactory.initElements(driver, SavedMobilePhonesPage.class);
     }
