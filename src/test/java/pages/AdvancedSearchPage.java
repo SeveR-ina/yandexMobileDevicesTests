@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -55,15 +54,35 @@ public class AdvancedSearchPage extends BasePage {
     }
 
     public void chooseSettings() {
-
+        printIntoField("20000", priceToInput);
+        spanDiagonal.click();
+        printIntoField("3", diagonalFromInput);
+        chooseMobileCompanies();
     }
 
-    public void saveThisMobilePhone() {
+    private void printIntoField(String text, WebElement input){
+        waitForVisibilityOf(input);
+        input.click();
+        input.clear();
+        input.sendKeys(text);
+    }
+
+    private void chooseMobileCompanies(){
+        appleMobilePhonesCheckBox.click();
+        samsungMobilePhonesCheckBox.click();
+        lgMobilePhonesCheckBox.click();
+        sonyMobilePhonesCheckBox.click();
+        htcMobilePhonesCheckBox.click();
+    }
+
+    public boolean isMobilePhoneSaved() {
         for (WebElement element : saveThisPhoneList) {
             Actions action = new Actions(driver);
             action.moveToElement(element).click().perform();
+            if (savedMobilePhones.getText().equals("1")) return true;
             break;
         }
+       return false;
     }
 
     public SavedMobilePhonesPage goToSavedMobilePhonesPage(){

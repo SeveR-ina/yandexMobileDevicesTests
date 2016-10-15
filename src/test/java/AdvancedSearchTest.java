@@ -3,12 +3,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.AdvancedSearchPage;
-import pages.MobileDevicesPage;
-import pages.YandexMarketPage;
-import pages.YandexPage;
+import pages.*;
 
 import java.io.IOException;
+
+import static org.testng.Assert.assertNotNull;
 
 /**
  * Created by cherr on 15-Oct-16.
@@ -38,18 +37,15 @@ public class AdvancedSearchTest extends MainOperations {
     }
 
     @Test(priority = 1)
-    public void chooseSettings(){
-
+    public void saveMobilePhone(){
+        advancedSearchPage.chooseSettings();
+        assertNotNull(advancedSearchPage.isMobilePhoneSaved());
     }
 
     @Test(priority = 2)
-    public void saveMobilePhone(){
-
-    }
-
-    @Test(priority = 3)
     public void goToSavedMobilePhones(){
-
+        SavedMobilePhonesPage savedMobilePhonesPage = advancedSearchPage.goToSavedMobilePhonesPage();
+        assertNotNull(savedMobilePhonesPage);
     }
 
 }

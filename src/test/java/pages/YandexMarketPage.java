@@ -21,7 +21,7 @@ public class YandexMarketPage extends  BasePage{
     }
 
     public Boolean isCatalogOpened(){
-        waitForVisibilityOf(catalog);
+        waitForVisibilityOf(catalog, 30);
         catalog.click();
         waitForVisibilityOfElementLocated(mobileDevicesLinkBy, 20);
         if (mobileDevicesLink.isDisplayed()) return true;
