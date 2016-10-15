@@ -25,8 +25,12 @@
         <module name="yandexMobileDevicesTests" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="yandexMobileDevicesTests" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="yandexMobileDevicesTests" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="GENERATE_NO_WARNINGS" value="true" />
+    <option name="DEPRECATION" value="false" />
   </component>
 </project>
